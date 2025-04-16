@@ -8,33 +8,52 @@ const tipPercent = document.getElementById("tip-percent");
 const tipAmountField = document.getElementById("tip-amount");
 
 
-billAmount.addEventListener("input", (e) =>
-{
-    const value = parseFloat(e.target.value);
+tipPercent.textContent = tipSlider.value + "%";
 
-    if (!isNaN(value) && value >= 0)
+function updateCalculations()
+{
+    const billValue = parseFloat(billAmount.value);
+    const tipValue = parseInt(tipSlider.value);
+
+    if (billAmount.value === "0" || billAmount.value === "")
     {
-        const billWithTax = value * 1.11;
-        billWithTaxField.value = billWithTax.toFixed(2);
-        billWithTaxAndTipField.value = billWithTax.toFixed(2);
+        errorMessage.textContent = "";
+        billWithTaxField.value = "0.00";
+        tipAmountField.value = "0.00";
+        billWithTaxAndTipField.value = "0.00";
+        return;
     }
+
+    if (!isNaN(billValue) && billValue >= 0)
+    {
+        errorMessage.textContent = "";
+
+        const billWithTax = billValue * 1.11;
+        billWithTaxField.value = billWithTax.toFixed(2);
+
+        const tipAmount = (tipValue / 100) * billValue;
+        tipAmountField.value = tipAmount.toFixed(2);
+
+        const totalBill = billWithTax + tipAmount;
+        billWithTaxAndTipField.value = totalBill.toFixed(2);
+    }
+
     else
     {
-        errorMessage.textContent = "Please enter a positive valid number."
+        errorMessage.textContent = "Please enter a positive valid number.";
         billWithTaxField.value = "";
+        tipAmountField.value = "";
+        billWithTaxAndTipField.value = "";
     }
-});
+}
 
-tipSlider.addEventListener("change", (e) =>
+billAmount.addEventListener("input", updateCalculations);
+tipSlider.addEventListener("input", (e) =>
 {
-    userTip = e.target.value;
-    tipPercent.textContent = userTip;
-    const tipAmount = parseFloat(((userTip / 100) * billAmount.value)).toFixed(2);
-    tipAmountField.value = tipAmount;
-    console.log(billWithTaxField.value);
-    console.log(tipAmount);
-    console.log(billWithTaxField.value + tipAmountField.value);
-    const totalBill = billWithTaxField.value + (tipAmount * 100);
-    billWithTaxAndTipField.value = parseFloat(totalBill).toFixed(2);
+    if (e.target.id === 'tip-slider')
+    {
+        tipPercent.textContent = e.target.value + "%";
+    }
+    updateCalculations();
+})
 
-});
