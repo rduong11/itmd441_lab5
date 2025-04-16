@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', function ()
             errorMessage.textContent = "";
 
             const billWithTax = billValue * 1.11;
-            billWithTaxField.value = billWithTax.toFixed(2);
+            billWithTaxField.value = "$" + billWithTax.toFixed(2);
 
             const tipAmount = (tipValue / 100) * billValue;
-            tipAmountField.value = tipAmount.toFixed(2);
+            tipAmountField.value = "$" + tipAmount.toFixed(2);
 
             const totalBill = billWithTax + tipAmount;
-            billWithTaxAndTipField.value = totalBill.toFixed(2);
+            billWithTaxAndTipField.value = "$" + totalBill.toFixed(2);
         }
 
         else
