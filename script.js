@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function ()
         if (e.target.id === 'tip-slider')
         {
             tipPercent.textContent = e.target.value + "%";
+            e.target.style.setProperty('--thumb-rotate', `${e.target.value}deg`);
         }
 
         updateCalculations();
