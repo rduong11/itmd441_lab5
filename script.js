@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', function ()
 
     tipPercent.textContent = tipSlider.value + "%";
 
+    function updateSliderColor()
+    {
+        const value = tipSlider.value;
+        const max = tipSlider.max;
+        const percentage = (value / max) * 100;
+
+        if (parseInt(value) > 0)
+        {
+            tipSlider.classList.add("colored-track");
+            tipSlider.style.setProperty('--range-progress', `${percentage}%`);
+        } else
+        {
+            tipSlider.classList.remove("colored-track");
+        }
+
+        tipSlider.style.setProperty('--thumb-rotate', `${(value / 100) * 3500}deg`);
+    }
+
     function updateCalculations()
     {
         const billValue = parseFloat(billAmount.value);
@@ -55,11 +73,13 @@ document.addEventListener('DOMContentLoaded', function ()
         if (e.target.id === 'tip-slider')
         {
             tipPercent.textContent = e.target.value + "%";
-            e.target.style.setProperty('--thumb-rotate', `${e.target.value}deg`);
+            updateSliderColor();
         }
 
         updateCalculations();
     });
+
+    updateSliderColor();
 });
 
 

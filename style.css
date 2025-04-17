@@ -41,6 +41,10 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none; 
     width: 90%;
+    background: #d3d3d3;
+    cursor: pointer; 
+    outline: none;
+    border-radius: 10px;
     vertical-align: middle;
     margin-bottom: 10px; 
 }
@@ -60,6 +64,14 @@ input[type="range"]::-webkit-slider-thumb {
     border: none;
     transition: .2s ease-in-out;
     transform: rotateZ(var(--thumb-rotate, 0deg));
+}
+
+input[type="range"].colored-track {
+    background: linear-gradient(to right, 
+                #006400 0%, 
+                #006400 var(--range-progress), 
+                #d3d3d3 var(--range-progress), 
+                #d3d3d3 100%);
 }
 
 #tip-percent {
