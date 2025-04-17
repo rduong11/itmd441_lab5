@@ -38,8 +38,24 @@ input[type="text"] {
 }
 
 input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none; 
     width: 90%;
     vertical-align: middle;
+    cursor: pointer; 
+    margin-bottom: 10px; 
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; 
+    height: 30px;
+    width: 30px;
+    background-image: url("assets/moneysign.jpeg");
+    border-radius: 50%;
+    border: none;
+    transition: .2s ease-in-out;
+    transform: rotateZ(var(--thumb-rotate, 0deg));
 }
 
 #tip-percent {
@@ -60,4 +76,5 @@ input:disabled {
     background-color: #f0f0f0;
     border: 1px solid #ddd;
     color: #555;
+    margin-bottom: 10px; 
 }
